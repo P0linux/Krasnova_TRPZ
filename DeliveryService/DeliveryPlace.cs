@@ -14,5 +14,6 @@ namespace DeliveryService
             Name = name;
             DistanceToShop = distanceToShop;
         }
+
     }
 }

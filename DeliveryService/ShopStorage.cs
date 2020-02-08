@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeliveryService
 {
-    static class ShopStorage
+    public static class ShopStorage
     {
         public static List<Product> AvailableProducts { get; set; } = new List<Product>();
         public static List<Transport> AllTransport { get; set; } = new List<Transport>();

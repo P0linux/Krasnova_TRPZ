@@ -4,14 +4,16 @@ using System.Text;
 
 namespace DeliveryService
 {
-    class DeliveryOrderUpdater : IOrderUpdater
+    public class DeliveryOrderUpdater : IOrderUpdater
     {
-        private ITimeCounter ReturnTimeCounter;
+        public ITimeCounter ReturnTimeCounter { get; set; }
         private DateTime currentTime;
+
         public DeliveryOrderUpdater(ITimeCounter timeCounter)
         {
             ReturnTimeCounter = timeCounter;
         }
+
         public void UpdateOrder(Order order)
         {
             TimeSpan newTimeToReady = order.TimeToReady - (currentTime - order.OrderTime);

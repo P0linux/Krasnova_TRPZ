@@ -20,7 +20,7 @@ namespace DeliveryService
             this.transportChooser = transportChooser;
         }
 
-        public void GetOrder(Order order)
+        private void GetOrder(Order order)
         {
             ChooseTransport(order);
             if (order.Transport.IsBusy == false) ShopStorage.DeliveryQueue.Add(order);
@@ -51,6 +51,13 @@ namespace DeliveryService
             {
                 order.TransportReturnTime = order.Transport.TimeReturnToShop;
             }
+        }
+
+        public Order CreateOrder(int number, Product product, DeliveryPlace place)
+        {
+            Order order = new Order(number, product, place, DateTime.Now);
+            GetOrder(order);
+            return order;
         }
     }
 }

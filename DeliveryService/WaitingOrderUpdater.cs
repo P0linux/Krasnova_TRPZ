@@ -6,10 +6,12 @@ namespace DeliveryService
 {
     public class WaitingOrderUpdater : IOrderUpdater
     {
-        
-        public WaitingOrderUpdater()
+        ITimeCounter ReturnTimeCounter;
+        ITimeCounter TimeToReadyCounter;
+        public WaitingOrderUpdater(ITimeCounter returnTimeCounter, ITimeCounter timeCounter)
         {
-
+            ReturnTimeCounter = returnTimeCounter;
+            TimeToReadyCounter = timeCounter;
         }
         public void UpdateOrder(Order order)
         {
@@ -25,6 +27,9 @@ namespace DeliveryService
                 {
                     ShopStorage.WaitingQueue.Remove(ord);
                     ShopStorage.DeliveryQueue.Add(ord);
+                    ord.TimeToReady = TimeToReadyCounter.CountTime(ord);
+                    ord.TransportReturnTime = ReturnTimeCounter.CountTime(ord);
+                    ord.Transport.IsBusy = true;
                     // PLACE AN ORDER
                     break;
                 }
