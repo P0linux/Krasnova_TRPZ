@@ -23,7 +23,10 @@ namespace DeliveryService
         private void GetOrder(Order order)
         {
             ChooseTransport(order);
-            if (order.Transport.IsBusy == false) ShopStorage.DeliveryQueue.Add(order);
+            if (order.IsDelivering == true)
+            {
+                ShopStorage.DeliveryQueue.Add(order);
+            } 
             else ShopStorage.WaitingQueue.Add(order);
             CountTime(order);
             UpdateOrders();
@@ -42,7 +45,7 @@ namespace DeliveryService
 
         private void CountTime(Order order)
         {
-            if (order.Transport.IsBusy == false)
+            if (order.IsDelivering == true)
             {
                 order.TimeToReady = timeToReadyCounter.CountTime(order); 
                 order.Transport.TimeReturnToShop = transportReturnTimeCounter.CountTime(order);

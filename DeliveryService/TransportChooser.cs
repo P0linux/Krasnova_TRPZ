@@ -21,6 +21,7 @@ namespace DeliveryService
                 Transport choosenTransport = ChooseFreeTransport(order, suitableTransport);
                 order.Transport = choosenTransport;
                 choosenTransport.IsBusy = true;
+                order.IsDelivering = true;
             }
         }
 

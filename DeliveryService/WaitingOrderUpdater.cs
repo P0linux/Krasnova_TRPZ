@@ -30,7 +30,7 @@ namespace DeliveryService
                     ord.TimeToReady = TimeToReadyCounter.CountTime(ord);
                     ord.TransportReturnTime = ReturnTimeCounter.CountTime(ord);
                     ord.Transport.IsBusy = true;
-                    // PLACE AN ORDER
+                    ord.IsDelivering = true;
                     break;
                 }
             }
