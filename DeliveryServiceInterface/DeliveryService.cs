@@ -22,6 +22,7 @@ namespace DeliveryServiceInterface
             InfoLoader.LoadInfo();
             cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
             cbPlace.SelectedIndexChanged += CbPlace_SelectedIndexChanged;
+
             shop = new Shop(new WaitingOrderUpdater(new TransportReturnTimeCounter(), new TimeToReadyCounter()), new DeliveryOrderUpdater(new TransportReturnTimeCounter()), 
                                  new TransportReturnTimeCounter(), new TimeToReadyCounter(), new TransportChooser());
         }
