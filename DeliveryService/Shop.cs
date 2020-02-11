@@ -2,7 +2,7 @@
 
 namespace DeliveryService
 {
-    public class Shop
+    public class Shop : IShop
     {
         IOrderUpdater waitingOrderUpdater;
         IOrderUpdater deliveryOrderUpdater;
