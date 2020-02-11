@@ -15,16 +15,15 @@ namespace DeliveryServiceInterface
     {
         Product product;
         DeliveryPlace place;
-        Shop shop;
-        public DeliveryServiceInterface()
+        IShop shop;
+        public DeliveryServiceInterface(IShop shop)
         {
             InitializeComponent();
             InfoLoader.LoadInfo();
             cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
             cbPlace.SelectedIndexChanged += CbPlace_SelectedIndexChanged;
 
-            shop = new Shop(new WaitingOrderUpdater(new TransportReturnTimeCounter(), new TimeToReadyCounter()), new DeliveryOrderUpdater(new TransportReturnTimeCounter()), 
-                                 new TransportReturnTimeCounter(), new TimeToReadyCounter(), new TransportChooser());
+            this.shop = shop;
         }
 
         private void CbPlace_SelectedIndexChanged(object sender, EventArgs e)

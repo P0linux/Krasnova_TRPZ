@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeliveryService
 {
-    interface IShop
+    public interface IShop
     {
         Order CreateOrder(int number, Product product, DeliveryPlace place);
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace DeliveryServiceInterface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DeliveryServiceInterface());
+            Application.Run(new DeliveryServiceInterface(new Shop(new WaitingOrderUpdater(new TransportReturnTimeCounter(), new TimeToReadyCounter()), new DeliveryOrderUpdater(new TransportReturnTimeCounter()),
+                                 new TransportReturnTimeCounter(), new TimeToReadyCounter(), new TransportChooser())));
         }
     }
 }
