@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess
 {
-    class XMLSerializer<T> : ISerializer<T>
+    public class XMLSerializer<T> : ISerializer<T>
     {
         DataContractSerializer xmlSerializer;
         public XMLSerializer(Type type)

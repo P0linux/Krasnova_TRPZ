@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess;
+using System;
 
 namespace DeliveryService
 {
@@ -9,6 +10,7 @@ namespace DeliveryService
         ITimeCounter transportReturnTimeCounter;
         ITimeCounter timeToReadyCounter;
         TransportChooser transportChooser;
+        DataAccesser<Shop> dataAccesser;
 
         public Shop(IOrderUpdater waitingOrderUpdater, IOrderUpdater deliveryOrderUpdater, ITimeCounter transportReturnTimeCounter,
                     ITimeCounter timeToReadyCounter, TransportChooser transportChooser)
@@ -18,6 +20,7 @@ namespace DeliveryService
             this.transportReturnTimeCounter = transportReturnTimeCounter;
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
+            dataAccesser = new DataAccesser<Shop>(new DataAccessController<Shop>(new XMLSerializer<Shop>(typeof(Shop))));
         }
 
         private void GetOrder(Order order)

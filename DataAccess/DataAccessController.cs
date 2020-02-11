@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccess
 {
-    class DataAccessController<T> : IDataAccessController<T>
+    public class DataAccessController<T> : IDataAccessController<T>
     {
         ISerializer<T> serializer;
         public DataAccessController(ISerializer<T> serializer)
