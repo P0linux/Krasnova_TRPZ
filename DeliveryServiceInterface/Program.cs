@@ -9,6 +9,8 @@ namespace DeliveryServiceInterface
 {
     static class Program
     {
+        static IContainer container { get; set; } = new ShopContainer();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,6 +21,7 @@ namespace DeliveryServiceInterface
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DeliveryServiceInterface(new Shop(new WaitingOrderUpdater(new TransportReturnTimeCounter(), new TimeToReadyCounter()), new DeliveryOrderUpdater(new TransportReturnTimeCounter()),
                                  new TransportReturnTimeCounter(), new TimeToReadyCounter(), new TransportChooser())));
+
         }
     }
 }
