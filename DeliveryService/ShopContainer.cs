@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataAccess;
 
 namespace DeliveryService
 {
@@ -12,6 +13,7 @@ namespace DeliveryService
         IOrderUpdater deliveryOrderUpdater;
         IOrderUpdater waitingOrderUpdater;
         TransportChooser transportChooser;
+        IDataContainer<Shop> dataContainer;
 
         public ShopContainer()
         {
@@ -20,10 +22,12 @@ namespace DeliveryService
             transportChooser = new TransportChooser();
             deliveryOrderUpdater = new DeliveryOrderUpdater(returnTimeCounter);
             waitingOrderUpdater = new WaitingOrderUpdater(returnTimeCounter, timeToReadyCounter);
+            dataContainer = new DataAccessContainer<Shop>();
         }
         public IShop GetShop()
         {
-            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser);
+            IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
+            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser, dataAccesser);
             return shop;
         }
     }

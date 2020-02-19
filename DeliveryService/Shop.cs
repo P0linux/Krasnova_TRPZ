@@ -10,17 +10,16 @@ namespace DeliveryService
         ITimeCounter transportReturnTimeCounter;
         ITimeCounter timeToReadyCounter;
         TransportChooser transportChooser;
-        DataAccesser<Shop> dataAccesser;
-
+        IDataAccessController<Shop> dataAccesser;
         public Shop(IOrderUpdater waitingOrderUpdater, IOrderUpdater deliveryOrderUpdater, ITimeCounter transportReturnTimeCounter,
-                    ITimeCounter timeToReadyCounter, TransportChooser transportChooser)
+                    ITimeCounter timeToReadyCounter, TransportChooser transportChooser, IDataAccessController<Shop> dataAccesser)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
             this.transportReturnTimeCounter = transportReturnTimeCounter;
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
-            dataAccesser = new DataAccesser<Shop>(new DataAccessController<Shop>(new XMLSerializer<Shop>(typeof(Shop))));
+            this.dataAccesser = dataAccesser;
         }
 
         private void GetOrder(Order order)
