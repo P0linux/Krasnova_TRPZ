@@ -81,7 +81,6 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Get order";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label3
             // 

@@ -6,6 +6,10 @@ namespace DeliveryService
 {
     public interface IShop
     {
-        Order CreateOrder(int number, Product product, DeliveryPlace place);
+        void CreateOrder(int number, string product, string place);
+        TimeSpan GetTime();
+        bool GetOrderStatus();
+        List<string> GetProducts();
+        List<string> GetDeliveryPlaces();
     }
 }

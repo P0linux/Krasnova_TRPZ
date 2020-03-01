@@ -19,7 +19,7 @@ namespace DeliveryServiceInterface
         public DeliveryServiceInterface(IShop shop)
         {
             InitializeComponent();
-            InfoLoader.LoadInfo();
+            //InfoLoader.LoadInfo();
             cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
             cbPlace.SelectedIndexChanged += CbPlace_SelectedIndexChanged;
 
@@ -49,19 +49,19 @@ namespace DeliveryServiceInterface
             fillComboBox();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            Order order = shop.CreateOrder(1, product, place);
-            if (ShopStorage.DeliveryQueue.Contains(order))
-            {
-                textBox1.Text = "Is delivering";
-                textBox2.Text = order.TimeToReady.ToString();
-            }
-            else
-            {
-                textBox1.Text = "IsWaiting";
-                textBox2.Text = order.Transport.TimeReturnToShop.ToString();
-            }
-        }
+        //private void Button1_Click(object sender, EventArgs e)
+        //{
+        //    Order order = shop.CreateOrder(1, product, place);
+        //    if (ShopStorage.DeliveryQueue.Contains(order))
+        //    {
+        //        textBox1.Text = "Is delivering";
+        //        textBox2.Text = order.TimeToReady.ToString();
+        //    }
+        //    else
+        //    {
+        //        textBox1.Text = "IsWaiting";
+        //        textBox2.Text = order.Transport.TimeReturnToShop.ToString();
+        //    }
+        //}
     }
 }

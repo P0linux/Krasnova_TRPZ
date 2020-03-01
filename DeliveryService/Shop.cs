@@ -1,10 +1,13 @@
 ﻿using DataAccess;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DeliveryService
 {
     public class Shop : IShop
     {
+        Order order;
         IOrderUpdater waitingOrderUpdater;
         IOrderUpdater deliveryOrderUpdater;
         ITimeCounter transportReturnTimeCounter;
@@ -20,6 +23,7 @@ namespace DeliveryService
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
             this.dataAccesser = dataAccesser;
+            InfoLoader.LoadInfo();
         }
 
         private void GetOrder(Order order)
@@ -58,11 +62,35 @@ namespace DeliveryService
             }
         }
 
-        public Order CreateOrder(int number, Product product, DeliveryPlace place)
+        public void CreateOrder(int number, string productName, string placeName)
         {
-            Order order = new Order(number, product, place, DateTime.Now);
+            var product = ShopStorage.AvailableProducts.Where(p => p.Name == productName).First();
+            var place = ShopStorage.DeliveryPlaces.Where(p => p.Name == placeName).First();
+            order = new Order(number, product as Product, place as DeliveryPlace, DateTime.Now);
             GetOrder(order);
-            return order;
+            //return order;
+        }
+
+        public TimeSpan GetTime()
+        {
+            if (order.IsDelivering) return order.TimeToReady;
+            else return order.TransportReturnTime;
+        }
+
+        public bool GetOrderStatus()
+        {
+            return order.IsDelivering;
+        }
+
+        public List<string> GetProducts()
+        {
+            return ShopStorage.AvailableProducts.Select(p => p.Name).ToList();
+        }
+
+        public List<string> GetDeliveryPlaces()
+        {
+            var list = ShopStorage.DeliveryPlaces.Select(p => p.Name).ToList();
+            return list;
         }
     }
 }

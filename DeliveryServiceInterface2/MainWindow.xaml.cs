@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DeliveryService;
 
 namespace DeliveryServiceInterface2
 {
@@ -20,9 +21,29 @@ namespace DeliveryServiceInterface2
     /// </summary>
     public partial class MainWindow : Window
     {
+        public delegate void GetOrderDelegate();
+        public event GetOrderDelegate GetOrder;
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel(new Model(new ShopContainer()), this);
         }
+
+        //public static class Commands
+        //{
+        //    public static RoutedCommand GetOrder { get; set; }
+        //    static Commands()
+        //    {
+        //        GetOrder = new RoutedCommand("GetOrder", typeof(MainWindow));
+        //    }
+
+        //}
+
+        private void BtnCreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            GetOrder();
+        }
+
+        
     }
 }

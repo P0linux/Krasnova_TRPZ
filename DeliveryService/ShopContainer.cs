@@ -23,11 +23,13 @@ namespace DeliveryService
             deliveryOrderUpdater = new DeliveryOrderUpdater(returnTimeCounter);
             waitingOrderUpdater = new WaitingOrderUpdater(returnTimeCounter, timeToReadyCounter);
             dataContainer = new DataAccessContainer<Shop>();
+            IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
+            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser, dataAccesser);
         }
         public IShop GetShop()
         {
-            IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
-            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser, dataAccesser);
+            /*IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
+            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser, dataAccesser);*/
             return shop;
         }
     }
