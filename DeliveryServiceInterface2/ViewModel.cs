@@ -11,10 +11,10 @@ namespace DeliveryServiceInterface2
     class ViewModel : INotifyPropertyChanged
     {
         IModel model;
-        public ViewModel(IModel model, MainWindow main)
+
+        public ViewModel(IModel model)
         {
             this.model = model;
-            main.GetOrder += GetOrder;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -94,6 +94,18 @@ namespace DeliveryServiceInterface2
             set
             {
                 isDelivering = value;
+            }
+        }
+
+        private RelayCommand getOrderCommand;
+        public RelayCommand GetOrderCommand
+        {
+            get
+            {
+                return getOrderCommand ?? (new RelayCommand(obj =>
+                {
+                    GetOrder();
+                }));
             }
         }
 
