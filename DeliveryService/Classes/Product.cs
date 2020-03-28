@@ -6,6 +6,7 @@ namespace DeliveryService
 {
     public class Product
     {
+        public int Id { get; set; }
         public string Type { get; set; } 
         public int Size { get; set; }
         public int Weight { get; set; }
