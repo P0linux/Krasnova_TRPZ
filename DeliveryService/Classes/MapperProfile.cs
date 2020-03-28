@@ -11,7 +11,7 @@ namespace DeliveryService.Classes
     {
         public MapperProfile()
         {
-            CreateMap<OrderModel, Order>().ReverseMap();
+            CreateMap<WaitingOrderModel, Order>().ReverseMap();
             CreateMap<ProductModel, Product>().ReverseMap();
             CreateMap<PriorityModel, Priority>().ReverseMap();
             CreateMap<TransportModel, Transport>().ReverseMap();

@@ -5,16 +5,16 @@ using System.Text;
 
 namespace DataAccess.EntityModels
 {
-    public class OrderModel : IEntity
+    class DeliveryOrderModel : IEntity
     {
         public int Id { get; set; }
         public int OrderNumber { get; set; }
         public ProductModel Product { get; set; }
         public DeliveryPlaceModel DeliveryPlace { get; set; }
         public DateTime OrderTime { get; set; }
-        public TimeSpan TimeToReady { get; set; } 
-        public TimeSpan TransportReturnTime { get; set; } 
-        public TransportModel Transport { get; set; } = null;
+        public TimeSpan TimeToReady { get; set; }
+        public TimeSpan TransportReturnTime { get; set; }
+        public TransportModel Transport { get; set; }
         public bool IsDelivering { get; set; } = false;
     }
 }
