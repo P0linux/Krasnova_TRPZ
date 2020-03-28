@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.EntityModels
 {
-    class OrderModel : IEntity
+    public class OrderModel : IEntity
     {
         public int Id { get; set; }
         public int OrderNumber { get; set; }

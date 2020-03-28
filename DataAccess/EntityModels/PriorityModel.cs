@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.EntityModels
 {
-    class PriorityModel : IEntity
+    public class PriorityModel : IEntity
     {
         public int Id { get; set; }
         public int ProductModelId { get; set; }

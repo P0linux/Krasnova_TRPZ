@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.EntityModels
 {
-    class TransportModel : IEntity
+    public class TransportModel : IEntity
     {
         public int Id { get; set; }
         public string Type { get; set; }
