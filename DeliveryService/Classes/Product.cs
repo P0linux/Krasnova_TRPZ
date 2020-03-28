@@ -11,7 +11,7 @@ namespace DeliveryService
         public int Size { get; set; }
         public int Weight { get; set; }
         public string Name { get; set; }
-        public List<Transport> availableTransport { get; set; } = new List<Transport>();
+        public ICollection<Transport> availableTransport { get; set; } = new List<Transport>();
         public Dictionary<Transport, int> TransportPriority { get; set; } = new Dictionary<Transport, int>();
 
         public Product(string type, int size, int weight, string name)
