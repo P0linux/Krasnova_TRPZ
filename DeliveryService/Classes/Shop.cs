@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DeliveryService.Iterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +9,20 @@ namespace DeliveryService
     public class Shop : IShop
     {
         Order order;
-        IOrderUpdater waitingOrderUpdater;
-        IOrderUpdater deliveryOrderUpdater;
-        ITimeCounter transportReturnTimeCounter;
-        ITimeCounter timeToReadyCounter;
+        IWaitingOrderUpdater waitingOrderUpdater;
+        IDeliveryOrderUpdater deliveryOrderUpdater;
+        ITransportReturnTimeCounter transportReturnTimeCounter;
+        ITimeToReadyCounter timeToReadyCounter;
         TransportChooser transportChooser;
-        IDataAccessController<Shop> dataAccesser;
-        public Shop(IOrderUpdater waitingOrderUpdater, IOrderUpdater deliveryOrderUpdater, ITimeCounter transportReturnTimeCounter,
-                    ITimeCounter timeToReadyCounter, TransportChooser transportChooser, IDataAccessController<Shop> dataAccesser)
+      
+        public Shop(IWaitingOrderUpdater waitingOrderUpdater, IDeliveryOrderUpdater deliveryOrderUpdater, ITransportReturnTimeCounter transportReturnTimeCounter,
+                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
             this.transportReturnTimeCounter = transportReturnTimeCounter;
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
-            this.dataAccesser = dataAccesser;
             InfoLoader.LoadInfo();
         }
 
@@ -45,8 +45,8 @@ namespace DeliveryService
 
         private void UpdateOrders()
         {
-            if (ShopStorage.DeliveryQueue.Count != 0) deliveryOrderUpdater.UpdateOrderList();
-            if (ShopStorage.WaitingQueue.Count != 0) waitingOrderUpdater.UpdateOrderList();
+            if (ShopStorage.DeliveryQueue.Count != 0) deliveryOrderUpdater.UpdateDeliveryOrderList();
+            if (ShopStorage.WaitingQueue.Count != 0) waitingOrderUpdater.UpdateWaitingOrderList();
         }
 
         private void CountTime(Order order)

@@ -4,11 +4,12 @@ using DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class PriorityRepository : IPriorityRepository
+    public class PriorityRepository : IPriorityRepository
     {
         DbSet<PriorityModel> _dbSet;
         public PriorityRepository(ApplicationContext context)

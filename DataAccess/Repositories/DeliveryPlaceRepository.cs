@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class DeliveryPlaceRepository : IDeliveryPlaceRepository
+    public class DeliveryPlaceRepository : IDeliveryPlaceRepository
     {
         DbSet<DeliveryPlaceModel> _dbSet;
         public DeliveryPlaceRepository(ApplicationContext context)

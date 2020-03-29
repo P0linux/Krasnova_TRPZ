@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeliveryService
+namespace DeliveryService.Iterfaces
 {
-    public interface ITimeCounter
+    public interface ITransportReturnTimeCounter
     {
         TimeSpan CountTime(Order order);
     }

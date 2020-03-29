@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class WaitingOrderRepository : IWaitingOrderRepository
+    public class WaitingOrderRepository : IWaitingOrderRepository
     {
         DbSet<WaitingOrderModel> _dbSet;
         public WaitingOrderRepository(ApplicationContext context)

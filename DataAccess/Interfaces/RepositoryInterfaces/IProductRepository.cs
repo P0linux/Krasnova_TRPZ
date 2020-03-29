@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces.RepositoryInterfaces
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
         IEnumerable<ProductModel> GetAll();
         void Insert(ProductModel model);

@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DeliveryService
 {
-    public interface IOrderUpdater
+    public interface ITimeToReadyCounter
     {
-        void UpdateOrderList();
-        void UpdateOrder(Order order);
+        TimeSpan CountTime(Order order);
     }
 }

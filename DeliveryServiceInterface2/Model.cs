@@ -9,31 +9,31 @@ namespace DeliveryServiceInterface2
 {
     class Model:IModel
     {
-        IContainer container;
-        public Model(IContainer container)
+        IShop shop;
+        public Model(IShop shop)
         {
-            this.container = container;
+            this.shop = shop;
         }
         public TimeSpan GetTime()
         {
-            return container.GetShop().GetTime();
+            return shop.GetTime();
         }
         public bool GetStatus()
         {
-            return container.GetShop().GetOrderStatus();
+            return shop.GetOrderStatus();
         }
         public List<string> GetProducts()
         {
-            return container.GetShop().GetProducts();
+            return shop.GetProducts();
         }
         public List<string> GetDeliveryPlaces()
         {
-            var list = container.GetShop().GetDeliveryPlaces();
+            var list = shop.GetDeliveryPlaces();
             return list;
         }
         public void GetOrder(int number, string product, string deliveryPlace)
         {
-            container.GetShop().CreateOrder(number, product, deliveryPlace);
+            shop.CreateOrder(number, product, deliveryPlace);
         }
     }
 }

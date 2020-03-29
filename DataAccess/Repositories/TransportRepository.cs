@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class TransportRepository: ITransportRepository
+    public class TransportRepository: ITransportRepository
     {
         DbSet<TransportModel> _dbSet;
         public TransportRepository(ApplicationContext context)

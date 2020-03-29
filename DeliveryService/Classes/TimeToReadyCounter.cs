@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeliveryService
 {
-    public class TimeToReadyCounter : ITimeCounter
+    public class TimeToReadyCounter : ITimeToReadyCounter
     {
         public TimeSpan CountTime(Order order)
         {

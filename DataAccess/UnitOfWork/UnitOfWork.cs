@@ -1,4 +1,5 @@
-﻿using DataAccess.Interfaces.RepositoryInterfaces;
+﻿using DataAccess.Interfaces;
+using DataAccess.Interfaces.RepositoryInterfaces;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.UnitOfWork
 {
-    class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationContext context;
         private IPriorityRepository priorityRepository;

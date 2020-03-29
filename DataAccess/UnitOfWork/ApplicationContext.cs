@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.UnitOfWork
 {
-    class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public DbSet<DeliveryOrderModel> DeliveryQueue { get; set; }
         public DbSet<WaitingOrderModel> WaitingQueue { get; set; }

@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using DataAccess;
+using DeliveryService.Iterfaces;
 
 namespace DeliveryService
 {
     public class ShopContainer : IContainer
     {
         IShop shop;
-        ITimeCounter returnTimeCounter;
-        ITimeCounter timeToReadyCounter;
-        IOrderUpdater deliveryOrderUpdater;
-        IOrderUpdater waitingOrderUpdater;
+        ITransportReturnTimeCounter returnTimeCounter;
+        ITimeToReadyCounter timeToReadyCounter;
+        IDeliveryOrderUpdater deliveryOrderUpdater;
+        IWaitingOrderUpdater waitingOrderUpdater;
         TransportChooser transportChooser;
         IDataContainer<Shop> dataContainer;
 
@@ -24,7 +25,7 @@ namespace DeliveryService
             waitingOrderUpdater = new WaitingOrderUpdater(returnTimeCounter, timeToReadyCounter);
             dataContainer = new DataAccessContainer<Shop>();
             IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
-            shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser, dataAccesser);
+            //shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser);
         }
         public IShop GetShop()
         {

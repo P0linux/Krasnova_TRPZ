@@ -24,7 +24,7 @@ namespace DeliveryServiceInterface2
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel(new Model(new ShopContainer()));
+            //this.DataContext = new ViewModel(new Model(new ShopContainer()));
         }        
     }
 }

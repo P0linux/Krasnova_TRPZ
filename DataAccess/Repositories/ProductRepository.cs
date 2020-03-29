@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DataAccess.Repositories
 {
-    class ProductRepository: IProductRepository
+    public class ProductRepository: IProductRepository
     {
         DbSet<ProductModel> _dbSet;
         public ProductRepository(ApplicationContext context)

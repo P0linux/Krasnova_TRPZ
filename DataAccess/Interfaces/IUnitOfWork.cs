@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IPriorityRepository PriorityRepository { get; }
         IDeliveryOrderRepository DeliveryOrderRepositoryRepository { get; }

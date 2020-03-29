@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DeliveryService.Iterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DeliveryService
 {
-    public class TransportReturnTimeCounter : ITimeCounter
+    public class TransportReturnTimeCounter : ITransportReturnTimeCounter
     {
         public TimeSpan CountTime(Order order)
         {

@@ -21,6 +21,5 @@ namespace DeliveryService
             Weight = weight;
             Name = name;
         }
-
     }
 }

@@ -1,28 +1,29 @@
-﻿using System;
+﻿using DeliveryService.Iterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DeliveryService
 {
-    public class WaitingOrderUpdater : IOrderUpdater
+    public class WaitingOrderUpdater : IWaitingOrderUpdater
     {
-        ITimeCounter ReturnTimeCounter;
-        ITimeCounter TimeToReadyCounter;
-        public WaitingOrderUpdater(ITimeCounter returnTimeCounter, ITimeCounter timeCounter)
+        ITransportReturnTimeCounter ReturnTimeCounter;
+        ITimeToReadyCounter TimeToReadyCounter;
+        public WaitingOrderUpdater(ITransportReturnTimeCounter returnTimeCounter, ITimeToReadyCounter timeCounter)
         {
             ReturnTimeCounter = returnTimeCounter;
             TimeToReadyCounter = timeCounter;
         }
-        public void UpdateOrder(Order order)
+        public void UpdateWaitingOrder(Order order)
         {
             order.TransportReturnTime = order.Transport.TimeReturnToShop;
         }
 
-        public void UpdateOrderList()
+        public void UpdateWaitingOrderList()
         {
             foreach (Order ord in ShopStorage.WaitingQueue)
             {
-                UpdateOrder(ord);
+                UpdateWaitingOrder(ord);
                 if (ord.Transport.IsBusy == false)
                 {
                     ShopStorage.WaitingQueue.Remove(ord);

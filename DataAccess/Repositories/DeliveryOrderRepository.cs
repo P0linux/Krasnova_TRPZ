@@ -9,7 +9,7 @@ using DataAccess.Interfaces.RepositoryInterfaces;
 
 namespace DataAccess.Repositories
 {
-    class DeliveryOrderRepository : IDeliveryOrderRepository
+    public class DeliveryOrderRepository : IDeliveryOrderRepository
     {
         DbSet<DeliveryOrderModel> _dbSet;
 

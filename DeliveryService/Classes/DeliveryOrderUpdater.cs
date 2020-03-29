@@ -1,20 +1,21 @@
-﻿using System;
+﻿using DeliveryService.Iterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DeliveryService
 {
-    public class DeliveryOrderUpdater : IOrderUpdater
+    public class DeliveryOrderUpdater : IDeliveryOrderUpdater
     {
-        public ITimeCounter ReturnTimeCounter { get; set; }
+        public ITransportReturnTimeCounter ReturnTimeCounter { get; set; }
         private DateTime currentTime;
 
-        public DeliveryOrderUpdater(ITimeCounter timeCounter)
+        public DeliveryOrderUpdater(ITransportReturnTimeCounter timeCounter)
         {
             ReturnTimeCounter = timeCounter;
         }
 
-        public void UpdateOrder(Order order)
+        public void UpdateDeliveryOrder(Order order)
         {
             TimeSpan newTimeToReady = order.TimeToReady - (currentTime - order.OrderTime);
             order.TimeToReady = newTimeToReady;
@@ -22,13 +23,13 @@ namespace DeliveryService
             order.Transport.TimeReturnToShop = newTransportReturnTime;
         }
 
-        public void UpdateOrderList()
+        public void UpdateDeliveryOrderList()
         {
             currentTime = DateTime.Now;
             List<Order> toRemove = new List<Order>();
             foreach (Order ord in ShopStorage.DeliveryQueue)
             {
-                UpdateOrder(ord);
+                UpdateDeliveryOrder(ord);
                 if (ord.TimeToReady.TotalHours <= 0) toRemove.Add(ord);
             }
             foreach (Order ord in toRemove)
