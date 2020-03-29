@@ -1,4 +1,5 @@
 ﻿using DeliveryService;
+using DeliveryService.Classes;
 using DeliveryService.Iterfaces;
 using Microsoft.Extensions.DependencyInjection;
 using DataAccess.UnitOfWork;
@@ -10,6 +11,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using AutoMapper;
+using DeliveryService.Services;
 
 namespace DeliveryServiceInterface2
 {
@@ -28,6 +31,7 @@ namespace DeliveryServiceInterface2
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new MapperConfiguration(conf => conf.AddProfile(new MapperProfile())).CreateMapper());
             services.AddTransient<IShop, Shop>();
             services.AddTransient<IWaitingOrderUpdater, WaitingOrderUpdater>();
             services.AddTransient<IDeliveryOrderUpdater, DeliveryOrderUpdater>();
@@ -39,6 +43,8 @@ namespace DeliveryServiceInterface2
             services.AddSingleton<MainWindow, MainWindow>();
             services.AddScoped<IModel, Model>();
             services.AddScoped<ViewModel, ViewModel>();
+            services.AddSingleton<InfoLoader, InfoLoader>();
+            services.AddTransient<ProductService, ProductService>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -30,7 +30,7 @@ namespace DataAccess.UnitOfWork
                     (priorityRepository = new PriorityRepository(context)); 
             }
         }
-        public IDeliveryOrderRepository DeliveryOrderRepositoryRepository
+        public IDeliveryOrderRepository DeliveryOrderRepository
         {
             get
             {

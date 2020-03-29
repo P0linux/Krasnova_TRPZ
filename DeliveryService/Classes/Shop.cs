@@ -14,16 +14,18 @@ namespace DeliveryService
         ITransportReturnTimeCounter transportReturnTimeCounter;
         ITimeToReadyCounter timeToReadyCounter;
         TransportChooser transportChooser;
+        InfoLoader loader;
       
         public Shop(IWaitingOrderUpdater waitingOrderUpdater, IDeliveryOrderUpdater deliveryOrderUpdater, ITransportReturnTimeCounter transportReturnTimeCounter,
-                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser)
+                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
             this.transportReturnTimeCounter = transportReturnTimeCounter;
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
-            InfoLoader.LoadInfo();
+            this.loader = loader;
+            loader.LoadInfo();
         }
 
         private void GetOrder(Order order)

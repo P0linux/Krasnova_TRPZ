@@ -7,7 +7,7 @@ using DataAccess.EntityModels;
 
 namespace DeliveryService.Classes
 {
-    class MapperProfile : Profile
+    public class MapperProfile : Profile
     {
         public MapperProfile()
         {

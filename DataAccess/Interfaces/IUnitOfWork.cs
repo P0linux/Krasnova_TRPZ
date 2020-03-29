@@ -8,7 +8,7 @@ namespace DataAccess.Interfaces
     public interface IUnitOfWork
     {
         IPriorityRepository PriorityRepository { get; }
-        IDeliveryOrderRepository DeliveryOrderRepositoryRepository { get; }
+        IDeliveryOrderRepository DeliveryOrderRepository { get; }
         IDeliveryPlaceRepository DeliveryPlaceRepository { get; }
         ITransportRepository TransportRepository { get; }
         IProductRepository ProductRepository { get; }

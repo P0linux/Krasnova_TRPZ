@@ -1,18 +1,28 @@
-﻿using System;
+﻿using DeliveryService.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DeliveryService
 {
-    public static class InfoLoader
+    public class InfoLoader
     {
-        public static void LoadInfo()
+        ProductService pService;
+
+        public InfoLoader(ProductService pService)
         {
+            this.pService = pService;
+        }
+        public void LoadInfo()
+        {
+
             Product p1 = new Product("Meat", 2, 3, "Chicken");
             Product p2 = new Product("Fish", 3, 3, "Salmon");
 
             ShopStorage.AvailableProducts.Add(p1);
             ShopStorage.AvailableProducts.Add(p2);
+
+            pService.Add(p1);
 
             Transport t1 = new Transport("Truck", 20, "Truck1", 20, 15, true);
             Transport t2 = new Transport("Byke", 20, "Byke1", 4, 2, false);
