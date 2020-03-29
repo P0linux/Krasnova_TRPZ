@@ -29,5 +29,11 @@ namespace DeliveryService.Services
             var ord = mapper.Map<WaitingOrderModel>(order);
             unitOfWork.WaitingOrderRepository.Update(ord);
         }
+
+        public void Add(Order order)
+        {
+            var ord = mapper.Map<WaitingOrderModel>(order);
+            unitOfWork.WaitingOrderRepository.Insert(ord);
+        }
     }
 }

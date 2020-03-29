@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DeliveryService.Iterfaces;
+using DeliveryService.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,12 @@ namespace DeliveryService
         ITimeToReadyCounter timeToReadyCounter;
         TransportChooser transportChooser;
         InfoLoader loader;
-      
+        ProductService productService;
+        DeliveryPlaceService deliveryPlaceService;
+
+
         public Shop(IWaitingOrderUpdater waitingOrderUpdater, IDeliveryOrderUpdater deliveryOrderUpdater, ITransportReturnTimeCounter transportReturnTimeCounter,
-                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader)
+                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader, ProductService productService, DeliveryPlaceService deliveryPlaceService)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
@@ -25,6 +29,8 @@ namespace DeliveryService
             this.timeToReadyCounter = timeToReadyCounter;
             this.transportChooser = transportChooser;
             this.loader = loader;
+            this.productService = productService;
+            this.deliveryPlaceService = deliveryPlaceService;
             loader.LoadInfo();
         }
 
@@ -86,13 +92,17 @@ namespace DeliveryService
 
         public List<string> GetProducts()
         {
-            return ShopStorage.AvailableProducts.Select(p => p.Name).ToList();
+            var products = productService.GetAll().Select(p => p.Name).ToList();
+            return products;
+            //return ShopStorage.AvailableProducts.Select(p => p.Name).ToList();
         }
 
         public List<string> GetDeliveryPlaces()
         {
-            var list = ShopStorage.DeliveryPlaces.Select(p => p.Name).ToList();
-            return list;
+            var deliveryPlaces = deliveryPlaceService.GetAll().Select(d => d.Name).ToList();
+            return deliveryPlaces;
+            //var list = ShopStorage.DeliveryPlaces.Select(p => p.Name).ToList();
+            //return list;
         }
     }
 }

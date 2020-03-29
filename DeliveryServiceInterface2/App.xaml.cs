@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using AutoMapper;
 using DeliveryService.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryServiceInterface2
 {
@@ -31,6 +32,11 @@ namespace DeliveryServiceInterface2
 
         private void ConfigureServices(IServiceCollection services)
         {
+
+            //var connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+
+
+            services.AddDbContext<ApplicationContext>(/*options => options.UseSqlServer(connection)*/);
             services.AddSingleton(new MapperConfiguration(conf => conf.AddProfile(new MapperProfile())).CreateMapper());
             services.AddTransient<IShop, Shop>();
             services.AddTransient<IWaitingOrderUpdater, WaitingOrderUpdater>();
@@ -45,6 +51,9 @@ namespace DeliveryServiceInterface2
             services.AddScoped<ViewModel, ViewModel>();
             services.AddSingleton<InfoLoader, InfoLoader>();
             services.AddTransient<ProductService, ProductService>();
+            services.AddTransient<TransportService, TransportService>();
+            services.AddTransient<DeliveryPlaceService, DeliveryPlaceService>();
+            services.AddTransient<PriorityService, PriorityService>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

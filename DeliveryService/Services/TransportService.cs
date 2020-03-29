@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DeliveryService.Services
 {
-    class TransportService
+    public class TransportService
     {
         private IMapper mapper;
         private IUnitOfWork unitOfWork;
@@ -28,6 +28,12 @@ namespace DeliveryService.Services
         {
             var trans = mapper.Map<TransportModel>(transport);
             unitOfWork.TransportRepository.Update(trans);
+        }
+
+        public void Add(Transport transport)
+        {
+            var trans = mapper.Map<TransportModel>(transport);
+            unitOfWork.TransportRepository.Insert(trans);
         }
     }
 }
