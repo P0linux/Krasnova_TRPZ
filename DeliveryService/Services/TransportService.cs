@@ -19,7 +19,7 @@ namespace DeliveryService.Services
 
         public ICollection<Transport> GetAll()
         {
-            var trans = unitOfWork.ProductRepository.GetAll();
+            var trans = unitOfWork.TransportRepository.GetAll();
             List<Transport> transports = mapper.Map<List<Transport>>(trans);
             return transports;
         }
@@ -28,12 +28,20 @@ namespace DeliveryService.Services
         {
             var trans = mapper.Map<TransportModel>(transport);
             unitOfWork.TransportRepository.Update(trans);
+            unitOfWork.Commit();
         }
 
         public void Add(Transport transport)
         {
             var trans = mapper.Map<TransportModel>(transport);
             unitOfWork.TransportRepository.Insert(trans);
+            unitOfWork.Commit();
+        }
+
+        public void DeleteById(int Id)
+        {
+            unitOfWork.TransportRepository.DeleteById(Id);
+            unitOfWork.Commit();
         }
     }
 }

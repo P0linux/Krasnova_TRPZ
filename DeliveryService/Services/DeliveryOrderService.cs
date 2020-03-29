@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DeliveryService.Services
 {
-    class DeliveryOrderService
+    public class DeliveryOrderService
     {
         private IMapper mapper;
         private IUnitOfWork unitOfWork;
@@ -28,12 +28,20 @@ namespace DeliveryService.Services
         {
             var ord = mapper.Map<DeliveryOrderModel>(order);
             unitOfWork.DeliveryOrderRepository.Update(ord);
+            unitOfWork.Commit();
         }
 
         public void Add(Order order)
         {
             var ord = mapper.Map<DeliveryOrderModel>(order);
             unitOfWork.DeliveryOrderRepository.Insert(ord);
+            unitOfWork.Commit();
+        }
+
+        public void DeleteById(int Id)
+        {
+            unitOfWork.DeliveryOrderRepository.DeleteById(Id);
+            unitOfWork.Commit();
         }
     }
 }

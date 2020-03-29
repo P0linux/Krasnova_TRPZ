@@ -20,9 +20,9 @@ namespace DeliveryService
         {
             returnTimeCounter = new TransportReturnTimeCounter();
             timeToReadyCounter = new TimeToReadyCounter();
-            transportChooser = new TransportChooser();
-            deliveryOrderUpdater = new DeliveryOrderUpdater(returnTimeCounter);
-            waitingOrderUpdater = new WaitingOrderUpdater(returnTimeCounter, timeToReadyCounter);
+            //transportChooser = new TransportChooser();
+            //deliveryOrderUpdater = new DeliveryOrderUpdater(returnTimeCounter);
+            //waitingOrderUpdater = new WaitingOrderUpdater(returnTimeCounter, timeToReadyCounter);
             dataContainer = new DataAccessContainer<Shop>();
             IDataAccessController<Shop> dataAccesser = dataContainer.GetDataAccesser();
             //shop = new Shop(waitingOrderUpdater, deliveryOrderUpdater, returnTimeCounter, timeToReadyCounter, transportChooser);

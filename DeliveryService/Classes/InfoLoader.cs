@@ -43,7 +43,7 @@ namespace DeliveryService
             p1.availableTransport.Add(t2);
 
             p2.availableTransport.Add(t1);
-            
+
             pService.Add(p1);
             pService.Add(p2);
 
@@ -74,6 +74,12 @@ namespace DeliveryService
             prService.Add(pr1);
             prService.Add(pr2);
             prService.Add(pr3);
+
+            //for (int i = 0; i<10; i++)
+            //{
+            //    tService.DeleteById(i);
+            //    pService.DeleteById(i);
+            //}
 
             unitOfWork.Commit();
 

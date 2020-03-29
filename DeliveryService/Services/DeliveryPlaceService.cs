@@ -28,6 +28,7 @@ namespace DeliveryService.Services
         {
             var del = mapper.Map<DeliveryPlaceModel>(deliveryPlace);
             unitOfWork.DeliveryPlaceRepository.Insert(del);
+            unitOfWork.Commit();
         }
     }
 }

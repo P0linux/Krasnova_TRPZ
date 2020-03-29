@@ -18,10 +18,13 @@ namespace DeliveryService
         InfoLoader loader;
         ProductService productService;
         DeliveryPlaceService deliveryPlaceService;
+        DeliveryOrderService deliveryOrderService;
+        WaitingOrderService waitingOrderService;
 
 
         public Shop(IWaitingOrderUpdater waitingOrderUpdater, IDeliveryOrderUpdater deliveryOrderUpdater, ITransportReturnTimeCounter transportReturnTimeCounter,
-                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader, ProductService productService, DeliveryPlaceService deliveryPlaceService)
+                    ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader, ProductService productService, DeliveryPlaceService deliveryPlaceService,
+                    DeliveryOrderService deliveryOrderService, WaitingOrderService waitingOrderService)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
@@ -31,6 +34,8 @@ namespace DeliveryService
             this.loader = loader;
             this.productService = productService;
             this.deliveryPlaceService = deliveryPlaceService;
+            this.waitingOrderService = waitingOrderService;
+            this.deliveryOrderService = deliveryOrderService;
             loader.LoadInfo();
         }
 
@@ -39,9 +44,10 @@ namespace DeliveryService
             ChooseTransport(order);
             if (order.IsDelivering == true)
             {
-                ShopStorage.DeliveryQueue.Add(order);
-            } 
-            else ShopStorage.WaitingQueue.Add(order);
+                deliveryOrderService.Add(order);
+                //ShopStorage.DeliveryQueue.Add(order);
+            }
+            else /*ShopStorage.WaitingQueue.Add(order);*/ waitingOrderService.Add(order);
             CountTime(order);
             UpdateOrders();
         }
@@ -53,8 +59,8 @@ namespace DeliveryService
 
         private void UpdateOrders()
         {
-            if (ShopStorage.DeliveryQueue.Count != 0) deliveryOrderUpdater.UpdateDeliveryOrderList();
-            if (ShopStorage.WaitingQueue.Count != 0) waitingOrderUpdater.UpdateWaitingOrderList();
+            if (/*ShopStorage.DeliveryQueue.Count != 0*/ deliveryOrderService.GetAll().Count != 0) deliveryOrderUpdater.UpdateDeliveryOrderList();
+            if (/*ShopStorage.WaitingQueue.Count != 0*/ waitingOrderService.GetAll().Count != 0) waitingOrderUpdater.UpdateWaitingOrderList();
         }
 
         private void CountTime(Order order)
@@ -72,8 +78,10 @@ namespace DeliveryService
 
         public void CreateOrder(int number, string productName, string placeName)
         {
-            var product = ShopStorage.AvailableProducts.Where(p => p.Name == productName).First();
-            var place = ShopStorage.DeliveryPlaces.Where(p => p.Name == placeName).First();
+            //var product = ShopStorage.AvailableProducts.Where(p => p.Name == productName).First();
+            //var place = ShopStorage.DeliveryPlaces.Where(p => p.Name == placeName).First();
+            var product = productService.GetAll().Where(p => p.Name == productName).First();
+            var place = deliveryPlaceService.GetAll().Where(p => p.Name == placeName).First();
             order = new Order(number, product as Product, place as DeliveryPlace, DateTime.Now);
             GetOrder(order);
             //return order;

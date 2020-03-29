@@ -30,7 +30,10 @@ namespace DeliveryService.Services
         public void Add(Priority priority)
         {
             var pr = mapper.Map<PriorityModel>(priority);
+            pr.ProductModel = mapper.Map<ProductModel>(priority.Product);
+            pr.TransportModel = mapper.Map<TransportModel>(priority.Transport);
             unitOfWork.PriorityRepository.Insert(pr);
+            unitOfWork.Commit();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryService.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,17 @@ namespace DeliveryService
 {
     public class TransportChooser
     {
+        TransportService tService;
+        public TransportChooser(TransportService tService)
+        {
+            this.tService = tService;
+        }
         public void ChooseTransport(Order order)
         {
-            ICollection<Transport> productAvailableTransport = order.Product.availableTransport;
-            var suitableTransport = ShopStorage.AllTransport.Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
 
+            ICollection<Transport> productAvailableTransport = order.Product.availableTransport;
+            //var suitableTransport = ShopStorage.AllTransport.Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
+            var suitableTransport = tService.GetAll().Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
             if (suitableTransport == null || suitableTransport.Count == 0)
             {
                 order.Transport = ChooseBusyTransport(order, productAvailableTransport);
@@ -21,6 +28,7 @@ namespace DeliveryService
                 Transport choosenTransport = ChooseFreeTransport(order, suitableTransport);
                 order.Transport = choosenTransport;
                 choosenTransport.IsBusy = true;
+                tService.Update(choosenTransport);
                 order.IsDelivering = true;
             }
         }

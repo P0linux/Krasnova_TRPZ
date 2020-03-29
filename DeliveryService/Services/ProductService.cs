@@ -28,6 +28,13 @@ namespace DeliveryService.Services
         {
             var prod = mapper.Map<ProductModel>(product);
             unitOfWork.ProductRepository.Insert(prod);
+            unitOfWork.Commit();
+        }
+
+        public void DeleteById(int Id)
+        {
+            unitOfWork.ProductRepository.DeleteById(Id);
+            unitOfWork.Commit();
         }
     }
 }

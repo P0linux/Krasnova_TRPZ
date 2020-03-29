@@ -54,6 +54,8 @@ namespace DeliveryServiceInterface2
             services.AddTransient<TransportService, TransportService>();
             services.AddTransient<DeliveryPlaceService, DeliveryPlaceService>();
             services.AddTransient<PriorityService, PriorityService>();
+            services.AddTransient<DeliveryOrderService, DeliveryOrderService>();
+            services.AddTransient<WaitingOrderService, WaitingOrderService>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
