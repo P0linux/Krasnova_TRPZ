@@ -13,16 +13,20 @@ namespace DeliveryService
         TransportService tService;
         DeliveryPlaceService plService;
         PriorityService prService;
+        WaitingOrderService wService;
+        DeliveryOrderService dService;
 
         IUnitOfWork unitOfWork;
 
-        public InfoLoader(ProductService pService, TransportService tService, DeliveryPlaceService plService, PriorityService prService, IUnitOfWork unitOfWork)
+        public InfoLoader(ProductService pService, TransportService tService, DeliveryPlaceService plService, PriorityService prService, IUnitOfWork unitOfWork, WaitingOrderService wService, DeliveryOrderService dService)
         {
             this.pService = pService;
             this.tService = tService;
             this.plService = plService;
             this.prService = prService;
             this.unitOfWork = unitOfWork;
+            this.dService = dService;
+            this.wService = wService;
         }
         public void LoadInfo()
         {
@@ -36,16 +40,16 @@ namespace DeliveryService
             Transport t1 = new Transport("Truck", 20, "Truck1", 20, 15, true);
             Transport t2 = new Transport("Byke", 20, "Byke1", 4, 2, false);
 
-            //tService.Add(t1);
-            //tService.Add(t2);
+            tService.Add(t1);
+            tService.Add(t2);
 
-            p1.availableTransport.Add(t1);
-            p1.availableTransport.Add(t2);
+            //p1.availableTransport.Add(t1);
+            //p1.availableTransport.Add(t2);
 
-            p2.availableTransport.Add(t1);
+            //p2.availableTransport.Add(t1);
 
-            //pService.Add(p1);
-            //pService.Add(p2);
+            pService.Add(p1);
+            pService.Add(p2);
 
             //ShopStorage.AllTransport.Add(t1);
             //ShopStorage.AllTransport.Add(t2);
@@ -67,25 +71,30 @@ namespace DeliveryService
 
             //p2.TransportPriority.Add(t1, 1);
 
-            Priority pr1 = new Priority(p1, t1, 1);
-            Priority pr2 = new Priority(p1, t2, 2);
-            Priority pr3 = new Priority(p2, t1, 1);
+            //Priority pr1 = new Priority(p1, t1, 1);
+            //Priority pr2 = new Priority(p1, t2, 2);
+            //Priority pr3 = new Priority(p2, t1, 1);
 
             //prService.Add(pr1);
             //prService.Add(pr2);
             //prService.Add(pr3);
 
-            //for (int i = 30; i < 70; i++)
+            //for (int i = 190; i < 195; i++)
             //{
+                
             //    tService.DeleteById(i);
+            //    unitOfWork.Commit();
+                
+            //}
+
+            //for (int i = 100; i<120; i++)
+            //{
             //    pService.DeleteById(i);
+            //    unitOfWork.Commit();
             //}
 
             unitOfWork.Commit();
 
         }
-
-
-
     }
 }

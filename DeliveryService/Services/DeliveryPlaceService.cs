@@ -30,5 +30,11 @@ namespace DeliveryService.Services
             unitOfWork.DeliveryPlaceRepository.Insert(del);
             unitOfWork.Commit();
         }
+
+        public void DeleteById(int Id)
+        {
+            unitOfWork.DeliveryPlaceRepository.DeleteById(Id);
+            unitOfWork.Commit();
+        }
     }
 }

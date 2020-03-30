@@ -20,11 +20,12 @@ namespace DeliveryService
         DeliveryPlaceService deliveryPlaceService;
         DeliveryOrderService deliveryOrderService;
         WaitingOrderService waitingOrderService;
+        TransportService transportService;
 
 
         public Shop(IWaitingOrderUpdater waitingOrderUpdater, IDeliveryOrderUpdater deliveryOrderUpdater, ITransportReturnTimeCounter transportReturnTimeCounter,
                     ITimeToReadyCounter timeToReadyCounter, TransportChooser transportChooser, InfoLoader loader, ProductService productService, DeliveryPlaceService deliveryPlaceService,
-                    DeliveryOrderService deliveryOrderService, WaitingOrderService waitingOrderService)
+                    DeliveryOrderService deliveryOrderService, WaitingOrderService waitingOrderService, TransportService transportService)
         {
             this.waitingOrderUpdater = waitingOrderUpdater;
             this.deliveryOrderUpdater = deliveryOrderUpdater;
@@ -36,19 +37,32 @@ namespace DeliveryService
             this.deliveryPlaceService = deliveryPlaceService;
             this.waitingOrderService = waitingOrderService;
             this.deliveryOrderService = deliveryOrderService;
+            this.transportService = transportService;
             loader.LoadInfo();
         }
 
         private void GetOrder(Order order)
         {
             ChooseTransport(order);
+            deliveryPlaceService.DeleteById(order.DeliveryPlace.Id);
+            productService.DeleteById(order.Product.Id);
+            transportService.DeleteById(order.Transport.Id);
+            order.Product.Id = 0;
+            order.DeliveryPlace.Id = 0;
+            order.Transport.Id = 0;
+            CountTime(order);
+
             if (order.IsDelivering == true)
             {
                 deliveryOrderService.Add(order);
                 //ShopStorage.DeliveryQueue.Add(order);
             }
-            else /*ShopStorage.WaitingQueue.Add(order);*/ waitingOrderService.Add(order);
-            CountTime(order);
+            else
+            {
+                /*ShopStorage.WaitingQueue.Add(order);*/
+                waitingOrderService.Add(order);
+            }
+            //CountTime(order);
             UpdateOrders();
         }
 
