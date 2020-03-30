@@ -33,10 +33,10 @@ namespace DeliveryServiceInterface2
         private void ConfigureServices(IServiceCollection services)
         {
 
-            //var connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            var connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
 
 
-            services.AddDbContext<ApplicationContext>(/*options => options.UseSqlServer(connection)*/);
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
             services.AddSingleton(new MapperConfiguration(conf => conf.AddProfile(new MapperProfile())).CreateMapper());
             services.AddTransient<IShop, Shop>();
             services.AddTransient<IWaitingOrderUpdater, WaitingOrderUpdater>();
@@ -47,8 +47,8 @@ namespace DeliveryServiceInterface2
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<ApplicationContext, ApplicationContext>();
             services.AddSingleton<MainWindow, MainWindow>();
-            services.AddScoped<IModel, Model>();
-            services.AddScoped<ViewModel, ViewModel>();
+            services.AddTransient<IModel, Model>();
+            services.AddTransient<ViewModel, ViewModel>();
             services.AddSingleton<InfoLoader, InfoLoader>();
             services.AddTransient<ProductService, ProductService>();
             services.AddTransient<TransportService, TransportService>();

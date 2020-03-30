@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces.RepositoryInterfaces
 {
-    public interface ITransportRepository
+    public interface ITransportRepository: IBaseRepository<TransportModel>
     {
         IEnumerable<TransportModel> GetAll();
         void Insert(TransportModel model);

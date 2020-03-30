@@ -31,6 +31,34 @@ namespace DeliveryService
         public void LoadInfo()
         {
 
+            for (int i = 10; i < 20; i++)
+            {
+
+                dService.DeleteById(i);
+                unitOfWork.Commit();
+            }
+
+            for (int i = 10; i < 20; i++)
+            {
+
+                wService.DeleteById(i);
+                unitOfWork.Commit();
+            }
+
+            for (int i = 190; i < 195; i++)
+            {
+
+                tService.DeleteById(i);
+                unitOfWork.Commit();
+
+            }
+
+            for (int i = 190; i < 220; i++)
+            {
+                pService.DeleteById(i);
+                unitOfWork.Commit();
+            }
+
             Product p1 = new Product("Meat", 2, 3, "Chicken");
             Product p2 = new Product("Fish", 3, 3, "Salmon");
 
@@ -40,16 +68,16 @@ namespace DeliveryService
             Transport t1 = new Transport("Truck", 20, "Truck1", 20, 15, true);
             Transport t2 = new Transport("Byke", 20, "Byke1", 4, 2, false);
 
-            tService.Add(t1);
-            tService.Add(t2);
+            //tService.Add(t1);
+            //tService.Add(t2);
 
             //p1.availableTransport.Add(t1);
             //p1.availableTransport.Add(t2);
 
             //p2.availableTransport.Add(t1);
 
-            pService.Add(p1);
-            pService.Add(p2);
+            //pService.Add(p1);
+            //pService.Add(p2);
 
             //ShopStorage.AllTransport.Add(t1);
             //ShopStorage.AllTransport.Add(t2);
@@ -79,19 +107,7 @@ namespace DeliveryService
             //prService.Add(pr2);
             //prService.Add(pr3);
 
-            //for (int i = 190; i < 195; i++)
-            //{
-                
-            //    tService.DeleteById(i);
-            //    unitOfWork.Commit();
-                
-            //}
-
-            //for (int i = 100; i<120; i++)
-            //{
-            //    pService.DeleteById(i);
-            //    unitOfWork.Commit();
-            //}
+            
 
             unitOfWork.Commit();
 

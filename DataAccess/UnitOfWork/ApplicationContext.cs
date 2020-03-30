@@ -9,11 +9,11 @@ namespace DataAccess.UnitOfWork
 {
     public class ApplicationContext : DbContext
     {
-        //public ApplicationContext(DbContextOptions<ApplicationContext> options)
-        //    :base(options)
-        //{
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
+        {
 
-        //}
+        }
 
         public DbSet<DeliveryOrderModel> DeliveryOrderModels { get; set; }
         public DbSet<WaitingOrderModel> WaitingOrderModel { get; set; }
@@ -22,10 +22,10 @@ namespace DataAccess.UnitOfWork
         public DbSet<DeliveryPlaceModel> DeliveryPlaceModels { get; set; }
         public DbSet<PriorityModel> PriorityModels { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=delivery;Integrated Security=True;");
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=delivery;Integrated Security=True;");
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }

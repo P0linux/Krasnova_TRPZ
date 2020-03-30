@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces
 {
-    interface IEntity
+    public interface IEntity
     {
        int Id { get; set; }
     }

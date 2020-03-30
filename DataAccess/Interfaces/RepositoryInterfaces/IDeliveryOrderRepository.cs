@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces.RepositoryInterfaces
 {
-    public interface IDeliveryOrderRepository
+    public interface IDeliveryOrderRepository:IBaseRepository<DeliveryOrderModel>
     {
         IEnumerable<DeliveryOrderModel> GetAll();
         void Insert(DeliveryOrderModel model);

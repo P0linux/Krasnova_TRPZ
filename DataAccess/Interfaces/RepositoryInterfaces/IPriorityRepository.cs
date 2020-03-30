@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interfaces.RepositoryInterfaces
 {
-    public interface IPriorityRepository
+    public interface IPriorityRepository: IBaseRepository<PriorityModel>
     {
         IEnumerable<PriorityModel> GetAll();
         void Insert(PriorityModel model);
