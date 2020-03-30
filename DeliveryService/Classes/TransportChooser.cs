@@ -15,13 +15,14 @@ namespace DeliveryService
         }
         public void ChooseTransport(Order order)
         {
-
-            ICollection<Transport> productAvailableTransport = order.Product.availableTransport;
+            var availableTransport = tService.GetAll();
+            var suitableTransport = availableTransport.Where(t => t.IsBusy == false).ToList();
+            //ICollection<Transport> productAvailableTransport = order.Product.availableTransport;
             //var suitableTransport = ShopStorage.AllTransport.Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
-            var suitableTransport = tService.GetAll().Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
+            //var suitableTransport = tService.GetAll().Where(t => productAvailableTransport.Contains(t) && t.IsBusy == false).ToList();
             if (suitableTransport == null || suitableTransport.Count == 0)
             {
-                order.Transport = ChooseBusyTransport(order, productAvailableTransport);
+                order.Transport = ChooseBusyTransport(order, availableTransport/*productAvailableTransport*/);
             }
             else
             {
@@ -35,15 +36,17 @@ namespace DeliveryService
 
         private Transport ChooseBusyTransport(Order order, ICollection<Transport> availableTransport)
         {
-            var firstPriority = order.Product.TransportPriority.Where(t => availableTransport.Contains(t.Key)).OrderBy(t => t.Value).First();
-            var choosenTransport = availableTransport.Where(t => t.Type.Equals(firstPriority.Key.Type)).OrderBy(t => t.TimeReturnToShop).First();
+            var choosenTransport = availableTransport.OrderBy(t => t.TimeReturnToShop).First();
+            //var firstPriority = order.Product.TransportPriority.Where(t => availableTransport.Contains(t.Key)).OrderBy(t => t.Value).First();
+            //var choosenTransport = availableTransport.Where(t => t.Type.Equals(firstPriority.Key.Type)).OrderBy(t => t.TimeReturnToShop).First();
             return choosenTransport;
         }
 
         private Transport ChooseFreeTransport(Order order, ICollection<Transport> suitableTransport)
         {
-            var firstPriority = order.Product.TransportPriority.Where(t => suitableTransport.Contains(t.Key)).OrderBy(t => t.Value).First();
-            var choosenTransport = suitableTransport.Where(t => t.Type.Equals(firstPriority.Key.Type)).First();
+            var choosenTransport = suitableTransport.First();
+            //var firstPriority = order.Product.TransportPriority.Where(t => suitableTransport.Contains(t.Key)).OrderBy(t => t.Value).First();
+            //var choosenTransport = suitableTransport.Where(t => t.Type.Equals(firstPriority.Key.Type)).First();
             return choosenTransport;
         }
     }

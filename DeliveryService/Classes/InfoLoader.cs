@@ -36,16 +36,16 @@ namespace DeliveryService
             Transport t1 = new Transport("Truck", 20, "Truck1", 20, 15, true);
             Transport t2 = new Transport("Byke", 20, "Byke1", 4, 2, false);
 
-            tService.Add(t1);
-            tService.Add(t2);
+            //tService.Add(t1);
+            //tService.Add(t2);
 
             p1.availableTransport.Add(t1);
             p1.availableTransport.Add(t2);
 
             p2.availableTransport.Add(t1);
 
-            pService.Add(p1);
-            pService.Add(p2);
+            //pService.Add(p1);
+            //pService.Add(p2);
 
             //ShopStorage.AllTransport.Add(t1);
             //ShopStorage.AllTransport.Add(t2);
@@ -56,8 +56,8 @@ namespace DeliveryService
             //ShopStorage.DeliveryPlaces.Add(d1);
             //ShopStorage.DeliveryPlaces.Add(d2);
 
-            plService.Add(d1);
-            plService.Add(d2);
+            //plService.Add(d1);
+            //plService.Add(d2);
 
             //ShopStorage.jamImpactIndexes.Add(new ShopStorage.JamInterval { startTime = new TimeSpan(6, 0, 0), endTime = new TimeSpan(7, 0, 0) }, 2);
             //ShopStorage.jamImpactIndexes.Add(new ShopStorage.JamInterval { startTime = new TimeSpan(18, 0, 0), endTime = new TimeSpan(19, 0, 0) }, 4); 
@@ -71,11 +71,11 @@ namespace DeliveryService
             Priority pr2 = new Priority(p1, t2, 2);
             Priority pr3 = new Priority(p2, t1, 1);
 
-            prService.Add(pr1);
-            prService.Add(pr2);
-            prService.Add(pr3);
+            //prService.Add(pr1);
+            //prService.Add(pr2);
+            //prService.Add(pr3);
 
-            //for (int i = 0; i<10; i++)
+            //for (int i = 30; i < 70; i++)
             //{
             //    tService.DeleteById(i);
             //    pService.DeleteById(i);

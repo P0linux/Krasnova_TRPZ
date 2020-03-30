@@ -26,8 +26,11 @@ namespace DeliveryService.Services
 
         public void Update(Transport transport)
         {
+            unitOfWork.TransportRepository.DeleteById(transport.Id);
             var trans = mapper.Map<TransportModel>(transport);
-            unitOfWork.TransportRepository.Update(trans);
+            unitOfWork.TransportRepository.Insert(trans);
+            //var trans = mapper.Map<TransportModel>(transport);
+            //unitOfWork.TransportRepository.Update(trans);
             unitOfWork.Commit();
         }
 
@@ -41,6 +44,17 @@ namespace DeliveryService.Services
         public void DeleteById(int Id)
         {
             unitOfWork.TransportRepository.DeleteById(Id);
+            unitOfWork.Commit();
+        }
+
+        public Transport GetById(int Id)
+        {
+            var trans = unitOfWork.TransportRepository.GetById(Id);
+            return mapper.Map<Transport>(trans);
+        }
+
+        public void Save()
+        {
             unitOfWork.Commit();
         }
     }
