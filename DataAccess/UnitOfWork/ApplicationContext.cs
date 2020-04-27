@@ -21,11 +21,5 @@ namespace DataAccess.UnitOfWork
         public DbSet<ProductModel> ProductModels { get; set; }
         public DbSet<DeliveryPlaceModel> DeliveryPlaceModels { get; set; }
         public DbSet<PriorityModel> PriorityModels { get; set; }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=delivery;Integrated Security=True;");
-        //    base.OnConfiguring(optionsBuilder);
-        //}
     }
 }
